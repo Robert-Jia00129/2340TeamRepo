@@ -1,476 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>SwiftHire Team</title>
-		<meta
-			name="description"
-			content="Meet the SwiftHire team—students and builders passionate about AI/ML, full‑stack engineering, and systems."
-		/>
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap"
-			rel="stylesheet"
-		/>
-		<style>
-			:root {
-				--bg: #0b0f19;
-				--panel: #0f172a;
-				--muted: #94a3b8;
-				--txt: #e5e7eb;
-				--brand: #22d3ee;
-				--brand2: #6ee7b7;
-				--ring: rgba(34, 211, 238, 0.35);
-			}
-			* {
-				box-sizing: border-box;
-			}
-			html,
-			body {
-				height: 100%;
-			}
-			body {
-				margin: 0;
-				font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu,
-					"Helvetica Neue", Arial;
-				background: radial-gradient(
-						1000px 600px at 10% -10%,
-						rgba(34, 211, 238, 0.15),
-						transparent
-					),
-					radial-gradient(
-						800px 500px at 100% 0%,
-						rgba(167, 139, 250, 0.12),
-						transparent
-					),
-					var(--bg);
-				color: var(--txt);
-				line-height: 1.55;
-			}
-			a {
-				color: inherit;
-			}
-			.container {
-				max-width: 1100px;
-				margin: 0 auto;
-				padding: 0 20px;
-			}
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SwiftHire — Team</title>
+  <meta name="description" content="A small Georgia Tech team building simple tools for finding and filling roles." />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#top" aria-label="SwiftHire home">
+        <span class="logo" aria-hidden="true">💼</span>
+        <strong>SwiftHire</strong>
+        <span class="badge">Team</span>
+      </a>
+      <nav class="links" aria-label="Primary">
+        <a class="btn" href="#mission">Mission</a>
+        <a class="btn" href="#team">Team</a>
+        <a class="btn" href="#contact">Contact</a>
+        <a class="btn primary" href="https://nullerrormusk.pythonanywhere.com/" target="_blank" rel="noopener">Visit Platform ↗</a>
+      </nav>
+      <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    </div>
+  </header>
 
-			/* Top nav */
-			header {
-				position: sticky;
-				top: 0;
-				z-index: 50;
-				backdrop-filter: saturate(180%) blur(8px);
-				background: rgba(11, 15, 25, 0.65);
-				border-bottom: 1px solid rgba(148, 163, 184, 0.12);
-			}
-			.nav {
-				display: flex;
-				align-items: center;
-				justify-content: space-between;
-				padding: 14px 0;
-			}
-			.brand {
-				display: flex;
-				align-items: center;
-				gap: 10px;
-				font-weight: 800;
-			}
-			.badge {
-				padding: 2px 8px;
-				border: 1px solid rgba(148, 163, 184, 0.25);
-				border-radius: 999px;
-				font-size: 12px;
-				color: var(--muted);
-			}
-			.links {
-				display: flex;
-				gap: 10px;
-				flex-wrap: wrap;
-			}
-			.btn {
-				display: inline-flex;
-				align-items: center;
-				gap: 8px;
-				border: 1px solid rgba(148, 163, 184, 0.25);
-				padding: 10px 14px;
-				border-radius: 12px;
-				text-decoration: none;
-				background: linear-gradient(
-					180deg,
-					rgba(255, 255, 255, 0.04),
-					rgba(255, 255, 255, 0)
-				);
-				cursor: pointer;
-			}
-			.btn:hover {
-				border-color: rgba(148, 163, 184, 0.45);
-			}
-			.btn.primary {
-				border-color: transparent;
-				background: linear-gradient(
-					180deg,
-					rgba(34, 211, 238, 0.3),
-					rgba(110, 231, 183, 0.25)
-				);
-				box-shadow: 0 0 0 4px var(--ring);
-			}
+  <main id="top" class="container">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="chip">Student-built · Iterative · Pragmatic</p>
+        <h1 class="title">We make hiring and applying feel straightforward.</h1>
+        <p class="lead">
+          We're a small team at Georgia Tech focused on simple, useful flows. This page is just an introduction—our job platform lives on a separate site.
+        </p>
+        <div class="actions">
+          <a class="btn primary" href="https://nullerrormusk.pythonanywhere.com/" target="_blank" rel="noopener">Open the Platform ↗</a>
+          <a class="btn" href="#team">Meet the Team</a>
+        </div>
+      </div>
 
-			/* Hero */
-			.hero {
-				padding: 64px 0 24px;
-				display: grid;
-				grid-template-columns: 1.1fr 0.9fr;
-				gap: 40px;
-				align-items: center;
-			}
-			@media (max-width: 900px) {
-				.hero {
-					grid-template-columns: 1fr;
-					padding-top: 36px;
-				}
-			}
-			.title {
-				font-size: clamp(28px, 4.6vw, 48px);
-				line-height: 1.08;
-				font-weight: 800;
-				margin: 6px 0;
-			}
-			.lead {
-				color: var(--muted);
-				font-size: clamp(14px, 2.4vw, 18px);
-			}
-			.panel {
-				background: linear-gradient(
-					180deg,
-					rgba(255, 255, 255, 0.04),
-					rgba(255, 255, 255, 0)
-				);
-				border: 1px solid rgba(148, 163, 184, 0.15);
-				border-radius: 16px;
-				padding: 16px;
-			}
+      <aside class="card hero-card">
+        <h3 class="card-title">What we care about</h3>
+        <ul class="pill-grid">
+          <li class="pill">
+            <span class="pill-icon" aria-hidden="true">⚡️</span>
+            <div>
+              <strong>Move fast, keep it clear</strong>
+              <p class="muted">Ship, test, trim. Obvious beats clever.</p>
+            </div>
+          </li>
+          <li class="pill">
+            <span class="pill-icon" aria-hidden="true">🛠️</span>
+            <div>
+              <strong>Hands-on engineering</strong>
+              <p class="muted">From backend to UI—whatever the problem needs.</p>
+            </div>
+          </li>
+          <li class="pill">
+            <span class="pill-icon" aria-hidden="true">🧭</span>
+            <div>
+              <strong>User first</strong>
+              <p class="muted">Less friction, better choices, quicker outcomes.</p>
+            </div>
+          </li>
+        </ul>
+      </aside>
+    </section>
 
-			/* Sections */
-			.section {
-				padding: 44px 0;
-			}
-			h2 {
-				font-size: clamp(22px, 3.6vw, 34px);
-				margin: 0 0 8px;
-			}
-			.muted {
-				color: var(--muted);
-			}
+    <section id="mission" class="section">
+      <h2>Mission</h2>
+      <p class="muted">
+        Reduce the distance between a great candidate and a great team. We focus on clarity, sensible defaults, and tooling that gets out of the way.
+      </p>
+    </section>
 
-			/* Values */
-			.values {
-				display: grid;
-				grid-template-columns: repeat(3, 1fr);
-				gap: 14px;
-			}
-			@media (max-width: 900px) {
-				.values {
-					grid-template-columns: 1fr;
-				}
-			}
-			.value {
-				padding: 16px;
-				border: 1px solid rgba(148, 163, 184, 0.15);
-				border-radius: 16px;
-				background: linear-gradient(
-					180deg,
-					rgba(255, 255, 255, 0.03),
-					rgba(255, 255, 255, 0)
-				);
-			}
-			.icon {
-				width: 28px;
-				height: 28px;
-				display: inline-grid;
-				place-items: center;
-				border-radius: 10px;
-				background: linear-gradient(
-					180deg,
-					rgba(167, 139, 250, 0.22),
-					rgba(34, 211, 238, 0.2)
-				);
-				margin-bottom: 6px;
-			}
+    <section id="team" class="section">
+      <h2>Team</h2>
+      <div class="team">
+        <article class="member card">
+          <div class="avatar" aria-hidden="true">JH</div>
+          <div>
+            <h3>Junhui Huang</h3>
+            <p class="muted">
+              CS student who likes shipping things end-to-end. Interests: full-stack, AI/ML systems, and a bit of security.
+            </p>
+            <span class="tag">Full-Stack · ML · Security</span>
+          </div>
+        </article>
 
-			/* Team */
-			.team {
-				display: grid;
-				grid-template-columns: repeat(3, 1fr);
-				gap: 16px;
-			}
-			@media (max-width: 900px) {
-				.team {
-					grid-template-columns: 1fr;
-				}
-			}
-			.member {
-				padding: 18px;
-				border: 1px solid rgba(148, 163, 184, 0.15);
-				border-radius: 16px;
-				background: linear-gradient(
-					180deg,
-					rgba(255, 255, 255, 0.04),
-					rgba(255, 255, 255, 0)
-				);
-				display: grid;
-				grid-template-columns: auto 1fr;
-				gap: 14px;
-			}
-			.avatar {
-				width: 56px;
-				height: 56px;
-				border-radius: 14px;
-				display: grid;
-				place-items: center;
-				font-weight: 800;
-				background: #0b1220;
-				border: 1px solid rgba(148, 163, 184, 0.2);
-			}
-			.member h3 {
-				margin: 0 0 4px;
-			}
-			.tag {
-				display: inline-block;
-				padding: 2px 8px;
-				border: 1px solid rgba(148, 163, 184, 0.2);
-				border-radius: 999px;
-				font-size: 12px;
-				color: var(--muted);
-			}
+        <article class="member card">
+          <div class="avatar" aria-hidden="true">RJ</div>
+          <div>
+            <h3>Zheng Robert Jia</h3>
+            <p class="muted">
+              Junior at Georgia Tech, focused on AI/ML and systems. Long-time research interest; now building toward impact in industry.
+            </p>
+            <span class="tag">AI/ML · Systems · Product</span>
+          </div>
+        </article>
 
-			/* Footer */
-			footer {
-				padding: 40px 0;
-				color: var(--muted);
-			}
-		</style>
-	</head>
-	<body>
-		<header>
-			<div class="container nav">
-				<div class="brand">
-					<span class="icon" aria-hidden="true">💼</span><span>SwiftHire</span
-					><span class="badge">Team</span>
-				</div>
-				<nav class="links">
-					<a class="btn" href="#mission">Mission</a>
-					<a class="btn" href="#team">Team</a>
-					<a class="btn" href="#contact">Contact</a>
-					<a
-						class="btn primary"
-						href="https://nullerrormusk.pythonanywhere.com/"
-						target="_blank"
-						rel="noopener"
-						>Visit Platform ↗</a
-					>
-				</nav>
-			</div>
-		</header>
+        <article class="member card">
+          <div class="avatar" aria-hidden="true">ZK</div>
+          <div>
+            <h3>Zheyuan (Kevin) Kou</h3>
+            <p class="muted">
+              CS at GT. Curious by default. When not coding: anime, games, and exploring new places.
+            </p>
+            <span class="tag">Intelligence · Systems · Curiosity</span>
+          </div>
+        </article>
 
-		<main class="container">
-			<section class="hero">
-				<div>
-					<div class="badge">Student‑built • Fast‑moving • Impact‑driven</div>
-					<h1 class="title">
-						We build simple experiences for finding and filling roles.
-					</h1>
-					<p class="lead">
-						We're a small team from Georgia Tech focused on shipping pragmatic,
-						human‑centered tools. This site is a lightweight intro to who we
-						are. Our job platform is hosted separately—check it out via the
-						button above.
-					</p>
-					<div style="display: flex; gap: 10px; margin-top: 14px">
-						<a
-							class="btn primary"
-							href="https://nullerrormusk.pythonanywhere.com/"
-							target="_blank"
-							rel="noopener"
-							>Open the Platform ↗</a
-						>
-						<a class="btn" href="#team">Meet the Team</a>
-					</div>
-				</div>
-				<div class="panel">
-					<h3 style="margin: 0 0 6px">What we value</h3>
-					<div class="values">
-						<article class="value">
-							<div class="icon">⚡️</div>
-							<strong>Velocity with care</strong>
-							<p class="muted">
-								Ship fast, iterate responsibly, and keep the UX obvious.
-							</p>
-						</article>
-						<article class="value">
-							<div class="icon">🤝</div>
-							<strong>Builder mindset</strong>
-							<p class="muted">
-								Hands‑on, full‑stack, and willing to learn whatever the problem
-								requires.
-							</p>
-						</article>
-						<article class="value">
-							<div class="icon">🧭</div>
-							<strong>User empathy</strong>
-							<p class="muted">
-								Design from first principles; measure outcomes, not outputs.
-							</p>
-						</article>
-					</div>
-				</div>
-			</section>
+        <article class="member card">
+          <div class="avatar" aria-hidden="true">SY</div>
+          <div>
+            <h3>Shi-Ting (Edward) Yao</h3>
+            <p class="muted">
+              Second-year CS (transfer from UIUC). Threads: Systems & Architecture, Intelligence. Music, photography, outdoors.
+            </p>
+            <span class="tag">Systems · Intelligence</span>
+          </div>
+        </article>
 
-			<section id="mission" class="section">
-				<h2>Mission</h2>
-				<p class="muted">
-					Reduce the distance between a great candidate and a great team. We
-					focus on removing friction—clear job information, sensible defaults,
-					and modern tooling—so both sides can focus on fit.
-				</p>
-			</section>
+        <article class="member card">
+          <div class="avatar" aria-hidden="true">LL</div>
+          <div>
+            <h3>Lijie Liu</h3>
+            <p class="muted">
+              Junior in CS with industry experience. Motivated by useful software that helps people at scale.
+            </p>
+            <span class="tag">Backend · Reliability</span>
+          </div>
+        </article>
+      </div>
+    </section>
 
-			<section id="team" class="section">
-				<h2>Team</h2>
-				<div class="team">
-					<article class="member">
-						<div class="avatar" aria-hidden="true">JH</div>
-						<div>
-							<h3>Junhui Huang</h3>
-							<p class="muted">
-								Proactive, project‑oriented learner and Computer Science student
-								with interest and experience in full‑stack development, AI/ML
-								systems, and cybersecurity.
-							</p>
-							<span class="tag">Full‑Stack • AI/ML • Security</span>
-						</div>
-					</article>
-					<article class="member">
-						<div class="avatar" aria-hidden="true">RJ</div>
-						<div>
-							<h3>Zheng Robert Jia</h3>
-							<p class="muted">
-								Junior at Georgia Tech passionate about AI/ML. Over five years
-								of research interest in this area and eager to apply it to
-								industry.
-							</p>
-							<span class="tag">AI/ML • Systems • Product</span>
-						</div>
-					</article>
-					<article class="member">
-						<div class="avatar" aria-hidden="true">SY</div>
-						<div>
-							<h3>Zheyuan Kou</h3>
-							<p class="muted">
-								Hi, I'm Kevin. I'm a first-gen immigrant from China and study
-								computer science at Georgia Tech, focusing on Intelligence and
-								Systems & Architecture. Outside of class when I'm not buried in
-								schoolwork, I'm probably watching anime, gaming, or off
-								traveling somewhere new.
-							</p>
-							<span class="tag">First-year • Intelligence • Curiosity</span>
-						</div>
-					</article>
-					<article class="member">
-						<div class="avatar" aria-hidden="true">SY</div>
-						<div>
-							<h3>Shi‑Ting (Edward) Yao</h3>
-							<p class="muted">
-								Second‑year CS major at Georgia Tech (transfer from UIUC).
-								Threads: system architecture and intelligence. Enjoys pop music
-								(K/J/M), photography, and the outdoors; happy to chat from CS to
-								philosophy, psychology, and economics.
-							</p>
-							<span class="tag">Systems • Intelligence • Curiosity</span>
-						</div>
-					</article>
-					<article class="member">
-						<div class="avatar" aria-hidden="true">SY</div>
-						<div>
-							<h3>Lijie Liu</h3>
-							<p class="muted">
-								Junior Year CS student. I have already had so many industry
-								experiences and I'm eager to build solutions that helps all
-								people.
-							</p>
-							<span class="tag">Systems • Intelligence • Curiosity</span>
-						</div>
-					</article>
-				</div>
-			</section>
+    <section id="contact" class="section">
+      <h2>Contact</h2>
+      <div class="card">
+        <p class="muted">Want to collaborate, mentor, or swap notes?</p>
+        <ul class="list">
+          <li>
+            Platform (temporary):
+            <a href="https://nullerrormusk.pythonanywhere.com/" target="_blank" rel="noopener">
+              nullerrormusk.pythonanywhere.com
+            </a>
+          </li>
+          <li>
+            Email: <span class="muted">add a shared inbox or individual contacts here</span>
+          </li>
+          <li>
+            This site: static files for easy GitHub Pages hosting.
+          </li>
+        </ul>
+      </div>
+    </section>
 
-			<section id="contact" class="section">
-				<h2>Contact</h2>
-				<div class="panel">
-					<p class="muted" style="margin: 0 0 6px">
-						Want to collaborate, mentor, or swap notes?
-					</p>
-					<ul class="muted" style="margin: 6px 0 0; padding-left: 18px">
-						<li>
-							Platform (temporary):
-							<a
-								href="https://nullerrormusk.pythonanywhere.com/"
-								target="_blank"
-								rel="noopener"
-								>nullerrormusk.pythonanywhere.com</a
-							>
-						</li>
-						<li>
-							Email:
-							<span class="muted"
-								>(add your shared inbox or individual contacts)</span
-							>
-						</li>
-						<li>
-							GitHub Pages: this site is a single <code>index.html</code> for
-							easy hosting.
-						</li>
-					</ul>
-				</div>
-			</section>
+    <section class="section">
+      <h2>Deploy on GitHub Pages</h2>
+      <div class="card">
+        <ol class="list ordered">
+          <li>Create a repo (e.g., <code>swifthire-team</code>).</li>
+          <li>Add these three files: <code>index.html</code>, <code>styles.css</code>, <code>main.js</code>.</li>
+          <li>Settings → Pages → Source: <strong>main / root</strong>.</li>
+          <li>Open the Pages URL once it’s built.</li>
+        </ol>
+      </div>
+      <p class="muted">© <span id="year"></span> SwiftHire Team.</p>
+    </section>
+  </main>
 
-			<footer class="container">
-				<div class="panel">
-					<h3 style="margin: 0 0 6px">Deploy on GitHub Pages</h3>
-					<ol class="muted" style="margin: 6px 0 0; padding-left: 20px">
-						<li>
-							Create a repo (e.g., <code>swifthire-team</code>). Add this file
-							as <code>index.html</code>.
-						</li>
-						<li>
-							Push, then go to <strong>Settings → Pages</strong> and set Source
-							to <strong>main / root</strong>.
-						</li>
-						<li>Open the Pages URL it provides once built.</li>
-					</ol>
-				</div>
-				<p style="margin-top: 12px">
-					© <span id="year"></span> SwiftHire Team. All rights reserved.
-				</p>
-			</footer>
-		</main>
-
-		<script>
-			// Current year in footer
-			document.getElementById("year").textContent = new Date().getFullYear();
-			// Smooth scroll for anchor links
-			document.querySelectorAll('a[href^="#"]').forEach((a) => {
-				a.addEventListener("click", (e) => {
-					const id = a.getAttribute("href");
-					if (id.length > 1) {
-						e.preventDefault();
-						document.querySelector(id).scrollIntoView({ behavior: "smooth" });
-					}
-				});
-			});
-		</script>
-	</body>
+  <script src="main.js"></script>
+</body>
 </html>
