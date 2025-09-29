@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SwiftHire — Post & Find Jobs Fast</title>
+  <meta name="description" content="A simple static landing page for a job platform: recruiters post jobs with location; job seekers search and apply in one click."/>
+  <style>
+    :root{
+      --bg:#0b0f19; --panel:#101827; --soft:#0f172a; --muted:#94a3b8;
+      --txt:#e5e7eb; --brand:#6ee7b7; --brand-2:#22d3ee; --accent:#a78bfa;
+      --card:#0b1220; --ring:rgba(34,211,238,.35);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,"Noto Sans","Apple Color Emoji","Segoe UI Emoji";
+      background: radial-gradient(1200px 600px at 10% -10%, rgba(34,211,238,.15), transparent) no-repeat,
+                  radial-gradient(800px 500px at 100% 0%, rgba(167,139,250,.12), transparent) no-repeat,
+                  var(--bg); color:var(--txt); line-height:1.5}
+    a{color:inherit}
+    header{position:sticky;top:0;backdrop-filter:saturate(180%) blur(8px); background:rgba(11,15,25,.65); border-bottom:1px solid rgba(148,163,184,.1); z-index:50}
+    .container{max-width:1100px;margin:0 auto;padding:0 20px}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.3px}
+    .badge{padding:2px 8px;border:1px solid rgba(148,163,184,.25);border-radius:999px;font-size:12px;color:var(--muted)}
+    .btn{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(148,163,184,.25);background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,0));
+      padding:10px 14px;border-radius:12px;color:var(--txt);cursor:pointer;text-decoration:none}
+    .btn:hover{border-color:rgba(148,163,184,.45)}
+    .btn.primary{border-color:transparent;background:linear-gradient(180deg, rgba(34,211,238,.3), rgba(110,231,183,.25)); box-shadow:0 0 0 4px var(--ring)}
+
+    .hero{padding:64px 0 32px; display:grid; grid-template-columns:1.1fr .9fr; gap:40px; align-items:center}
+    @media (max-width: 900px){ .hero{grid-template-columns:1fr; padding-top:36px}}
+    .title{font-size: clamp(28px, 4.8vw, 46px); line-height:1.1; font-weight:900; margin:6px 0}
+    .lead{color:var(--muted); font-size: clamp(14px, 2.5vw, 18px)}
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:24px 0 8px}
+    @media (max-width: 900px){ .cards{grid-template-columns:1fr} }
+    .card{background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,0)); border:1px solid rgba(148,163,184,.15); border-radius:16px; padding:16px}
+    .icon{width:28px;height:28px;display:inline-grid;place-items:center;border-radius:10px;background:linear-gradient(180deg, rgba(167,139,250,.22), rgba(34,211,238,.2))}
+
+    .section{padding:40px 0}
+    h2{font-size: clamp(22px, 3.6vw, 34px); margin:0 0 6px}
+    .muted{color:var(--muted)}
+
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+    @media (max-width: 900px){ .grid{grid-template-columns:1fr}}
+
+    .panel{background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,0)); border:1px solid rgba(148,163,184,.15); border-radius:16px; padding:16px}
+
+    /* Job list */
+    .toolbar{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:12px}
+    .input, select{width:100%; max-width:340px; padding:10px 12px; border-radius:12px; border:1px solid rgba(148,163,184,.25); background:#0c1424; color:var(--txt)}
+    .jobs{display:grid; grid-template-columns:1fr; gap:12px}
+    .job{display:grid; grid-template-columns: 1fr auto; gap:12px; padding:14px; border:1px solid rgba(148,163,184,.15); border-radius:14px; background:rgba(12,20,36,.6)}
+    .job h3{margin:0 0 2px; font-size:18px}
+    .meta{display:flex; gap:8px; flex-wrap:wrap; color:var(--muted); font-size:13px}
+    .pill{border:1px solid rgba(148,163,184,.2); border-radius:999px; padding:2px 8px}
+    .stack{display:flex; flex-direction:column; gap:10px}
+
+    /* Team */
+    .team{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
+    @media (max-width: 900px){ .team{grid-template-columns:1fr}}
+    .member{padding:16px; border:1px solid rgba(148,163,184,.15); border-radius:16px; background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,0))}
+    .member h3{margin:0 0 6px}
+
+    /* Footer */
+    footer{padding:40px 0; color:var(--muted)}
+
+    /* Modal */
+    dialog{border:none; padding:0; border-radius:16px; width:min(680px, 92vw); background:#0c1424; color:var(--txt);
+      box-shadow: 0 10px 40px rgba(0,0,0,.5); border:1px solid rgba(148,163,184,.2)}
+    dialog::backdrop{background:rgba(3,7,18,.6)}
+    .modal-head{display:flex;justify-content:space-between;align-items:center; padding:14px 16px; border-bottom:1px solid rgba(148,163,184,.15)}
+    .modal-body{padding:16px}
+    .grid-2{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+    @media (max-width: 700px){ .grid-2{grid-template-columns:1fr}}
+    .field{display:flex; gap:6px; flex-direction:column}
+    .field label{font-size:13px; color:var(--muted)}
+    textarea.input{min-height:100px; resize:vertical}
+
+    .empty{border:1px dashed rgba(148,163,184,.3); padding:20px; border-radius:14px; text-align:center; color:var(--muted)}
+    .notice{font-size:13px; color:var(--muted)}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand" aria-label="SwiftHire">
+        <span class="icon" aria-hidden="true">💼</span>
+        <span>SwiftHire</span>
+        <span class="badge">Static demo</span>
+      </div>
+      <nav style="display:flex; gap:8px">
+        <a class="btn" href="#jobs">Find Jobs</a>
+        <button class="btn primary" id="openPostJob">Post a Job</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div>
+        <div class="badge">Recruiters & Job Seekers</div>
+        <h1 class="title">Post jobs with location. Find roles. Apply in one click.</h1>
+        <p class="lead">A minimal, GitHub Pages–friendly front-end that showcases our platform’s flow—no backend required. Add jobs locally, search by title or location, and simulate one‑click applications.</p>
+        <div style="display:flex; gap:10px; margin-top:14px">
+          <a class="btn primary" href="#jobs">Browse Jobs</a>
+          <button class="btn" id="openRecruiterDash">Recruiter Dashboard</button>
+        </div>
+        <div class="cards">
+          <div class="card"><span class="icon">📍</span>
+            <h3 style="margin:8px 0 6px">Location‑aware postings</h3>
+            <p class="muted">Recruiters include city/state (or remote). Search filters update automatically.</p>
+          </div>
+          <div class="card"><span class="icon">⚡️</span>
+            <h3 style="margin:8px 0 6px">One‑click apply</h3>
+            <p class="muted">Job seekers apply instantly in this demo—perfect for showing the UX.</p>
+          </div>
+          <div class="card"><span class="icon">🧭</span>
+            <h3 style="margin:8px 0 6px">Zero setup backend</h3>
+            <p class="muted">Everything runs in the browser via <code>localStorage</code>, ideal for GitHub Pages.</p>
+          </div>
+        </div>
+      </div>
+      <div class="panel stack" role="region" aria-label="Quick Post">
+        <h3 style="margin:0">Quick Job Post</h3>
+        <p class="muted">Try it: add a job right here. It appears instantly below.</p>
+        <form id="quickPostForm" class="stack">
+          <div class="grid-2">
+            <div class="field"><label for="qTitle">Job Title</label><input id="qTitle" class="input" placeholder="e.g., Backend Engineer" required/></div>
+            <div class="field"><label for="qCompany">Company</label><input id="qCompany" class="input" placeholder="e.g., Acme Inc." required/></div>
+            <div class="field"><label for="qLocation">Location</label><input id="qLocation" class="input" placeholder="City, State or Remote" required/></div>
+            <div class="field"><label for="qType">Type</label>
+              <select id="qType" class="input">
+                <option>Full-time</option><option>Part-time</option><option>Internship</option><option>Contract</option><option>Remote</option>
+              </select>
+            </div>
+          </div>
+          <div class="field"><label for="qDesc">Short Description</label><textarea id="qDesc" class="input" placeholder="Optional summary"></textarea></div>
+          <button class="btn primary" type="submit">Add Job</button>
+          <p class="notice">Tip: Everything stays in your browser until you clear site data.</p>
+        </form>
+      </div>
+    </section>
+
+    <section id="jobs" class="section">
+      <h2>Open Roles</h2>
+      <p class="muted" style="margin-top:0">Search by title, company, or location. Use the location filter to narrow results.</p>
+      <div class="toolbar">
+        <input id="searchInput" class="input" placeholder="Search jobs..." aria-label="Search jobs" />
+        <select id="locationFilter" aria-label="Filter by location">
+          <option value="">All locations</option>
+        </select>
+        <select id="typeFilter" aria-label="Filter by type">
+          <option value="">All types</option>
+          <option>Full-time</option><option>Part-time</option><option>Internship</option><option>Contract</option><option>Remote</option>
+        </select>
+      </div>
+      <div id="jobsList" class="jobs"></div>
+      <div id="jobsEmpty" class="empty" hidden>No jobs yet. Post one above to get started.</div>
+    </section>
+
+    <section class="section">
+      <h2>Team</h2>
+      <div class="team">
+        <article class="member">
+          <h3>Junhui Huang</h3>
+          <p class="muted">Hi, I'm a proactive, project-oriented learner and Computer Science student with interest and experience in full-stack development, AI/ML systems, and cybersecurity.</p>
+        </article>
+        <article class="member">
+          <h3>Zheng Robert Jia</h3>
+          <p class="muted">Hi, I'm a junior year student at GT passionate about AI/ML. I've had over 5 years of research interest in this area and eager to apply those to industry.</p>
+        </article>
+        <article class="member">
+          <h3>Shi‑Ting (Edward) Yao</h3>
+          <p class="muted">I am a second year computer science major at Georgia Institute of Technology. I just transferred here after my first year at University of Illinois Urbana Champaign. My threads are system architecture and intelligence. My hobbies include listening to pop music, whether that's Korean, Japanese, or Mandarin; photography; outdoor recreation. If you happen to meet me, we can talk all the way from computer science to philosophy, psychology, and economics.</p>
+        </article>
+      </div>
+    </section>
+
+    <footer class="container">
+      <div class="panel">
+        <h3 style="margin:0 0 6px">Ship this to GitHub Pages</h3>
+        <ol class="muted" style="margin:6px 0 0; padding-left:20px">
+          <li>Create a repo (e.g., <code>swift-hire</code>). Add this file as <code>index.html</code>.</li>
+          <li>Push, then in <strong>Settings → Pages</strong>, set Source to <strong>main / root</strong>.</li>
+          <li>Wait a minute, then open the Pages URL it gives you.</li>
+        </ol>
+      </div>
+      <p style="margin-top:12px">© <span id="year"></span> SwiftHire. Demo UI only.</p>
+    </footer>
+  </main>
+
+  <!-- Post Job Modal -->
+  <dialog id="postJobModal" aria-modal="true" aria-labelledby="postJobTitle">
+    <form method="dialog">
+      <div class="modal-head">
+        <h3 id="postJobTitle" style="margin:0">Post a Job</h3>
+        <button class="btn" value="cancel" aria-label="Close">✕</button>
+      </div>
+    </form>
+    <div class="modal-body">
+      <form id="postJobForm" class="stack">
+        <div class="grid-2">
+          <div class="field"><label for="title">Job Title</label><input id="title" class="input" required/></div>
+          <div class="field"><label for="company">Company</label><input id="company" class="input" required/></div>
+          <div class="field"><label for="location">Location</label><input id="location" class="input" placeholder="City, State or Remote" required/></div>
+          <div class="field"><label for="type">Type</label>
+            <select id="type" class="input">
+              <option>Full-time</option><option>Part-time</option><option>Internship</option><option>Contract</option><option>Remote</option>
+            </select>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="field"><label for="salary">Salary (optional)</label><input id="salary" class="input" placeholder="$120k – $150k"/></div>
+          <div class="field"><label for="applyUrl">Apply URL (optional)</label><input id="applyUrl" class="input" placeholder="https://..."/></div>
+        </div>
+        <div class="field"><label for="description">Description</label><textarea id="description" class="input" placeholder="Write a short description..."></textarea></div>
+        <div style="display:flex; gap:10px">
+          <button class="btn primary" type="submit">Publish</button>
+          <button class="btn" type="button" id="closePostJob">Cancel</button>
+        </div>
+        <p class="notice">Note: On GitHub Pages this stores to your browser only (no server).</p>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- Recruiter Dashboard Modal -->
+  <dialog id="recruiterDash" aria-modal="true" aria-labelledby="dashTitle">
+    <form method="dialog">
+      <div class="modal-head">
+        <h3 id="dashTitle" style="margin:0">Your Job Postings</h3>
+        <button class="btn" value="cancel" aria-label="Close">✕</button>
+      </div>
+    </form>
+    <div class="modal-body">
+      <div id="yourJobs" class="stack"></div>
+      <div class="empty" id="noYourJobs" hidden>You haven't posted anything yet.</div>
+    </div>
+  </dialog>
+
+  <!-- Apply Modal -->
+  <dialog id="applyModal" aria-modal="true" aria-labelledby="applyTitle">
+    <form method="dialog">
+      <div class="modal-head">
+        <h3 id="applyTitle" style="margin:0">One‑Click Apply</h3>
+        <button class="btn" value="cancel" aria-label="Close">✕</button>
+      </div>
+    </form>
+    <div class="modal-body">
+      <p class="muted" id="applyJobSummary"></p>
+      <form id="applyForm" class="grid-2">
+        <div class="field"><label for="applicantName">Your Name</label><input id="applicantName" class="input" placeholder="Optional"/></div>
+        <div class="field"><label for="applicantEmail">Email</label><input id="applicantEmail" class="input" type="email" placeholder="you@example.com"/></div>
+        <button class="btn primary" type="submit" style="grid-column:1/-1">Apply Now</button>
+      </form>
+      <p class="notice">Demo only: application is stored locally and a success toast appears.</p>
+    </div>
+  </dialog>
+
+  <script>
+    const LS_KEY = 'swifthire_jobs_v1';
+    const LS_APPS = 'swifthire_apps_v1';
+
+    const $ = (s, root=document) => root.querySelector(s);
+    const $$ = (s, root=document) => Array.from(root.querySelectorAll(s));
+
+    const jobsListEl = $('#jobsList');
+    const emptyEl = $('#jobsEmpty');
+    const locationFilter = $('#locationFilter');
+    const typeFilter = $('#typeFilter');
+    const searchInput = $('#searchInput');
+
+    const postJobModal = $('#postJobModal');
+    const applyModal = $('#applyModal');
+    const recruiterDash = $('#recruiterDash');
+
+    let jobs = loadJobs();
+
+    function loadJobs(){
+      const seeded = [
+        {id:id(), title:'Full‑Stack Engineer', company:'Aurora Labs', location:'Atlanta, GA', type:'Full-time', salary:'$120k–$150k', description:'Own end‑to‑end features across React/Node/Postgres. Cloud experience a plus.', createdAt:Date.now()-86400000},
+        {id:id(), title:'Data Scientist (NLP)', company:'Polaris AI', location:'Remote', type:'Remote', salary:'$140k–$175k', description:'Ship production NLP systems; Python, PyTorch, LLMs.', createdAt:Date.now()-172800000},
+        {id:id(), title:'Security Engineer Intern', company:'Shieldloop', location:'San Francisco, CA', type:'Internship', salary:'$45/hr', description:'Assist with cloud security posture and automation.', createdAt:Date.now()-259200000},
+      ];
+      const raw = localStorage.getItem(LS_KEY);
+      if(!raw){ localStorage.setItem(LS_KEY, JSON.stringify(seeded)); return seeded }
+      try{ return JSON.parse(raw) }catch{ return seeded }
+    }
+
+    function saveJobs(){ localStorage.setItem(LS_KEY, JSON.stringify(jobs)); refreshFilters(); renderJobs() }
+
+    function id(){ return Math.random().toString(36).slice(2,9) }
+
+    function renderJobs(){
+      const q = searchInput.value.trim().toLowerCase();
+      const loc = locationFilter.value;
+      const typ = typeFilter.value;
+
+      const filtered = jobs.filter(j => {
+        const text = (j.title+" "+j.company+" "+j.location).toLowerCase();
+        return (!q || text.includes(q)) && (!loc || j.location===loc) && (!typ || j.type===typ);
+      }).sort((a,b)=>b.createdAt-a.createdAt);
+
+      jobsListEl.innerHTML = '';
+      if(filtered.length===0){ emptyEl.hidden=false; return }
+      emptyEl.hidden = true;
+
+      for(const j of filtered){
+        const card = document.createElement('article');
+        card.className='job';
+        card.innerHTML = `
+          <div>
+            <h3>${escapeHTML(j.title)} <span class="pill" style="margin-left:6px; font-size:12px">${escapeHTML(j.type)}</span></h3>
+            <div class="meta">
+              <span>🏢 ${escapeHTML(j.company)}</span>
+              <span>📍 ${escapeHTML(j.location)}</span>
+              ${j.salary?`<span class="pill">💸 ${escapeHTML(j.salary)}</span>`:''}
+            </div>
+            ${j.description?`<p style="margin:8px 0 0">${escapeHTML(j.description)}</p>`:''}
+          </div>
+          <div style="display:flex; gap:8px; align-items:start">
+            ${j.applyUrl?`<a href="${escapeAttr(j.applyUrl)}" class="btn" target="_blank" rel="noopener">Apply</a>`:''}
+            <button class="btn primary" data-apply="${j.id}">One‑Click Apply</button>
+          </div>
+        `;
+        jobsListEl.appendChild(card);
+      }
+    }
+
+    function refreshFilters(){
+      const uniqueLocs = [...new Set(jobs.map(j=>j.location))].sort();
+      const cur = locationFilter.value;
+      locationFilter.innerHTML = '<option value="">All locations</option>' + uniqueLocs.map(l=>`<option ${l===cur?'selected':''}>${escapeHTML(l)}</option>`).join('');
+    }
+
+    // Quick Post form
+    $('#quickPostForm').addEventListener('submit', e=>{
+      e.preventDefault();
+      const j = {
+        id:id(), title:$('#qTitle').value.trim(), company:$('#qCompany').value.trim(),
+        location:$('#qLocation').value.trim(), type:$('#qType').value, description:$('#qDesc').value.trim(),
+        createdAt:Date.now()
+      };
+      if(!j.title||!j.company||!j.location) return;
+      jobs = [j, ...jobs];
+      saveJobs();
+      e.target.reset();
+      toast('Job added');
+    });
+
+    // Post Job Modal
+    $('#openPostJob').addEventListener('click', ()=> postJobModal.showModal());
+    $('#closePostJob').addEventListener('click', ()=> postJobModal.close());
+    $('#postJobForm').addEventListener('submit', e=>{
+      e.preventDefault();
+      const j = {
+        id:id(), title:$('#title').value.trim(), company:$('#company').value.trim(),
+        location:$('#location').value.trim(), type:$('#type').value, salary:$('#salary').value.trim(),
+        applyUrl:$('#applyUrl').value.trim(), description:$('#description').value.trim(), createdAt:Date.now()
+      };
+      if(!j.title||!j.company||!j.location){ toast('Please fill title, company, and location'); return; }
+      jobs = [j, ...jobs]; saveJobs(); postJobModal.close(); toast('Job published');
+    });
+
+    // Recruiter Dashboard
+    $('#openRecruiterDash').addEventListener('click', ()=>{ renderYourJobs(); recruiterDash.showModal() });
+    function renderYourJobs(){
+      const wrap = $('#yourJobs'); wrap.innerHTML='';
+      if(jobs.length===0){ $('#noYourJobs').hidden=false; return } else { $('#noYourJobs').hidden=true }
+      for(const j of jobs){
+        const row = document.createElement('div');
+        row.className='job';
+        row.innerHTML = `
+          <div>
+            <strong>${escapeHTML(j.title)}</strong> · ${escapeHTML(j.company)} — <span class="muted">${escapeHTML(j.location)}</span>
+            <div class="muted" style="font-size:12px; margin-top:4px">${new Date(j.createdAt).toLocaleString()}</div>
+          </div>
+          <div style="display:flex; gap:8px">
+            <button class="btn" data-edit="${j.id}">Edit</button>
+            <button class="btn" data-del="${j.id}">Delete</button>
+          </div>`;
+        wrap.appendChild(row);
+      }
+    }
+
+    recruiterDash.addEventListener('click', e=>{
+      const del = e.target.closest('[data-del]');
+      const edit = e.target.closest('[data-edit]');
+      if(del){
+        const id=del.dataset.del; jobs = jobs.filter(j=>j.id!==id); saveJobs(); renderYourJobs(); toast('Deleted');
+      }
+      if(edit){
+        const id=edit.dataset.edit; const j = jobs.find(x=>x.id===id); if(!j) return;
+        postJobModal.showModal();
+        $('#title').value=j.title; $('#company').value=j.company; $('#location').value=j.location; $('#type').value=j.type;
+        $('#salary').value=j.salary||''; $('#applyUrl').value=j.applyUrl||''; $('#description').value=j.description||'';
+        // Replace submit behavior temporarily
+        const form = $('#postJobForm');
+        const handler = function(ev){ ev.preventDefault();
+          j.title=$('#title').value.trim(); j.company=$('#company').value.trim(); j.location=$('#location').value.trim();
+          j.type=$('#type').value; j.salary=$('#salary').value.trim(); j.applyUrl=$('#applyUrl').value.trim(); j.description=$('#description').value.trim();
+          saveJobs(); postJobModal.close(); toast('Updated'); form.removeEventListener('submit', handler); };
+        form.addEventListener('submit', handler);
+      }
+    });
+
+    // One‑click apply
+    document.addEventListener('click', e=>{
+      const btn = e.target.closest('[data-apply]');
+      if(!btn) return;
+      const j = jobs.find(x=>x.id===btn.dataset.apply); if(!j) return;
+      $('#applyJobSummary').textContent = `${j.title} @ ${j.company} — ${j.location}`;
+      $('#applyForm').dataset.jobId = j.id;
+      applyModal.showModal();
+    });
+
+    $('#applyForm').addEventListener('submit', e=>{
+      e.preventDefault();
+      const jobId = e.target.dataset.jobId;
+      const name = $('#applicantName').value.trim();
+      const email = $('#applicantEmail').value.trim();
+      const appsRaw = localStorage.getItem(LS_APPS);
+      const apps = appsRaw? JSON.parse(appsRaw): [];
+      apps.push({id:id(), jobId, name, email, at: Date.now()});
+      localStorage.setItem(LS_APPS, JSON.stringify(apps));
+      applyModal.close();
+      toast('Applied successfully');
+      e.target.reset();
+    });
+
+    // Search / filters
+    [searchInput, locationFilter, typeFilter].forEach(el=> el.addEventListener('input', renderJobs));
+
+    // Util
+    function escapeHTML(s=''){ return s.replace(/[&<>"]+/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c])) }
+    function escapeAttr(s=''){ return s.replace(/["<>]/g, '') }
+
+    // Toasts
+    const toastWrap = document.createElement('div');
+    toastWrap.style.cssText='position:fixed;right:16px;bottom:16px;display:flex;flex-direction:column;gap:8px;z-index:9999';
+    document.body.appendChild(toastWrap);
+    function toast(msg){
+      const el=document.createElement('div');
+      el.textContent=msg; el.style.cssText='background:rgba(34,197,94,.15); border:1px solid rgba(34,197,94,.35); color:#d1fae5; padding:10px 12px; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,.35)';
+      toastWrap.appendChild(el); setTimeout(()=>{ el.style.opacity='0'; el.style.transition='opacity .3s'; setTimeout(()=> el.remove(), 350) }, 1600);
+    }
+
+    // Init
+    refreshFilters(); renderJobs();
+    $('#year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
