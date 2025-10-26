@@ -1,6 +1,3 @@
-// Footer year
-document.getElementById("year").textContent = new Date().getFullYear();
-
 // Smooth scroll for in-page anchors
 document.querySelectorAll('a[href^="#"]').forEach((a) => {
   a.addEventListener("click", (e) => {
