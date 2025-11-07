@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>SwiftHire — Team</title>
-  <meta name="description" content="A small Georgia Tech team building simple tools for finding and filling roles." />
+  <title>SwiftHire — Team & Projects</title>
+  <meta name="description" content="A small Georgia Tech team building simple tools for finding and filling roles — and now a student organization platform for events & finance." />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
@@ -20,12 +20,14 @@
       </a>
       <nav class="links" aria-label="Primary">
         <a class="btn" href="#mission">About</a>
+        <a class="btn" href="#org">Org Platform</a>
         <a class="btn" href="#demo">Demo</a>
         <a class="btn" href="#team">Team</a>
         <a class="btn" href="#system">Features</a>
         <a class="btn" href="#process">Process</a>
         <a class="btn" href="#contact">Contact</a>
-        <a class="btn primary" href="https://nullerrormusk.pythonanywhere.com/" target="_blank" rel="noopener">Visit Platform ↗</a>
+        <a class="btn primary" href="https://nullerrormusk.pythonanywhere.com/" target="_blank" rel="noopener">Visit Job Platform ↗</a>
+        <a class="btn primary" href="https://charlesflow-nextjs.vercel.app/" target="_blank" rel="noopener">Visit Org Platform ↗</a>
       </nav>
       <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">☰</button>
     </div>
@@ -35,13 +37,14 @@
     <section class="hero">
       <div class="hero-copy">
         <p class="chip">Student-built · Iterative · Pragmatic</p>
-        <h1 class="title">We make hiring and applying feel straightforward.</h1>
+        <h1 class="title">We build lightweight platforms for jobs <em>and</em> student orgs.</h1>
         <p class="lead">
-          We're a small team at Georgia Tech focused on simple, useful flows. This page is just an introduction—our job platform lives on a separate site.
+          Our original project is a straightforward job search & recruiting tool. Our new project is a student organization management system for events and finance.
         </p>
         <div class="actions">
-          <a class="btn primary" href="https://nullerrormusk.pythonanywhere.com/" target="_blank" rel="noopener">Open the Platform ↗</a>
-          <a class="btn" href="#team">Meet the Team</a>
+          <a class="btn primary" href="https://nullerrormusk.pythonanywhere.com/" target="_blank" rel="noopener">Open Job Platform ↗</a>
+          <a class="btn" href="https://charlesflow-nextjs.vercel.app/" target="_blank" rel="noopener">Open Org Platform ↗</a>
+          <a class="btn" href="#org">See Org Features</a>
         </div>
       </div>
 
@@ -84,6 +87,98 @@
       <p class="muted">
         Our development follows Agile Scrum methodology across three sprints, prioritizing user-centered design principles and modern web technologies. The result is a pragmatic solution that reduces friction in the hiring process while maintaining the flexibility both candidates and recruiters need to make informed decisions.
       </p>
+    </section>
+
+    <!-- NEW: Organization Platform section -->
+    <section id="org" class="section">
+      <h2>Student Organization Platform</h2>
+      <p class="muted">
+        We're also building a <strong>student organization management system</strong>—focused on simple event workflows and transparent finances. It complements our recruiting app, but targets club admins, members, and visitors.
+      </p>
+      <div class="actions" style="margin-top:10px;">
+        <a class="btn" href="https://charlesflow-nextjs.vercel.app/" target="_blank" rel="noopener">Visit Org Platform ↗</a>
+      </div>
+
+      <div class="feature-grid" style="margin-top:18px;">
+        <article class="feature-category card">
+          <div class="feature-header">
+            <span class="feature-icon">👀</span>
+            <h3>For Visitors</h3>
+          </div>
+          <div class="feature-item">
+            <h4>📅 Browse Events</h4>
+            <p class="muted">View event name, description, date, and location; register for upcoming activities.</p>
+          </div>
+        </article>
+
+        <article class="feature-category card">
+          <div class="feature-header">
+            <span class="feature-icon">🧑‍🎓</span>
+            <h3>For Members</h3>
+          </div>
+          <div class="feature-item">
+            <h4>🛠️ Create & Manage Events</h4>
+            <p class="muted">Create events with title, date, location; edit or cancel later to keep details accurate.</p>
+          </div>
+        </article>
+
+        <article class="feature-category card full-width">
+          <div class="feature-header">
+            <span class="feature-icon">💵</span>
+            <h3>For Treasurers & Owners</h3>
+          </div>
+          <div class="feature-dual">
+            <div class="feature-item">
+              <h4>🧾 Reimbursements</h4>
+              <p class="muted">Submit reimbursement requests with receipts and expense notes; track request history.</p>
+            </div>
+            <div class="feature-item">
+              <h4>🏦 Funding & Sponsors</h4>
+              <p class="muted">Apply for funding for events/needs and record sponsor statuses to keep books accurate.</p>
+            </div>
+          </div>
+          <div class="feature-dual" style="margin-top:14px;">
+            <div class="feature-item">
+              <h4>📈 Finance Dashboards</h4>
+              <p class="muted">Charts & reports for spending trends; drill-in statements for transparency.</p>
+            </div>
+            <div class="feature-item">
+              <h4>✅ Approvals</h4>
+              <p class="muted">Owners approve/deny reimbursement and funding requests with clear audit trails.</p>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="section" style="padding-top:24px;">
+        <h3>User Stories</h3>
+        <div class="feature-grid">
+          <article class="feature-category card">
+            <div class="feature-header"><span class="feature-icon">👥</span><h3>Visitors</h3></div>
+            <div class="feature-item"><p class="muted">View key info for each event (name, description, location).</p></div>
+            <div class="feature-item"><p class="muted">Browse and register for upcoming events.</p></div>
+          </article>
+          <article class="feature-category card">
+            <div class="feature-header"><span class="feature-icon">🧑‍💻</span><h3>Members</h3></div>
+            <div class="feature-item"><p class="muted">Create and manage events (title, date, location).</p></div>
+            <div class="feature-item"><p class="muted">Edit or cancel events to keep information up-to-date.</p></div>
+          </article>
+          <article class="feature-category card">
+            <div class="feature-header"><span class="feature-icon">💳</span><h3>Treasurers</h3></div>
+            <div class="feature-item"><p class="muted">Submit reimbursement requests with receipts & details.</p></div>
+            <div class="feature-item"><p class="muted">View reimbursement history.</p></div>
+            <div class="feature-item"><p class="muted">Apply for funding for upcoming events or needs.</p></div>
+            <div class="feature-item"><p class="muted">Record and track sponsor funding status.</p></div>
+            <div class="feature-item"><p class="muted">View charts/reports of spending trends.</p></div>
+            <div class="feature-item"><p class="muted">View detailed financial statements.</p></div>
+          </article>
+          <article class="feature-category card">
+            <div class="feature-header"><span class="feature-icon">🧑‍⚖️</span><h3>Owners</h3></div>
+            <div class="feature-item"><p class="muted">Approve/reject reimbursement requests.</p></div>
+            <div class="feature-item"><p class="muted">Approve/deny funding requests.</p></div>
+          </article>
+        </div>
+      </div>
     </section>
 
     <section id="team" class="section">
@@ -342,9 +437,15 @@
       <div class="card">
         <ul class="list">
           <li>
-            Platform (temporary):
+            Job platform (temporary):
             <a href="https://nullerrormusk.pythonanywhere.com/" target="_blank" rel="noopener">
               nullerrormusk.pythonanywhere.com
+            </a>
+          </li>
+          <li>
+            Org platform (beta):
+            <a href="https://charlesflow-nextjs.vercel.app/" target="_blank" rel="noopener">
+              charlesflow-nextjs.vercel.app
             </a>
           </li>
         </ul>
