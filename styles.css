@@ -95,6 +95,7 @@ a {
   );
   transition: border-color 0.15s ease, transform 0.05s ease;
   cursor: pointer;
+  white-space: nowrap;
 }
 .btn:hover {
   border-color: rgba(148, 163, 184, 0.45);
